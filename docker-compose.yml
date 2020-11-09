@@ -1,0 +1,35 @@
+version: '3'
+services: 
+    api:
+        build:
+            dockerfile: ./docker/laravel.dockerfile
+            context: .
+        image: auris/apilaravel
+        container_name: api
+        volumes: 
+            - ./api:/var/www
+        working_dir: /var/www
+        command: "php artisan serve --host 0.0.0.0"
+        ports: 
+            - "1234:8000"
+        networks: 
+            - "teste-network"
+        depends_on: 
+            - "mysql"
+
+    mysql:
+        build:
+            dockerfile: ./docker/database.dockerfile
+            context: .
+        image: auris/dbaselaravel
+        container_name: dbase
+        ports: 
+            - "3306:3306"
+        networks: 
+            - "teste-network" 
+volumes: 
+    sistema:
+
+networks: 
+    teste-network:
+        driver: bridge

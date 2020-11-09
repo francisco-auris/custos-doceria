@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('/teste', function(){
+    return response()->json([
+        'status'=>'success',
+        'message'=>'Apenas teste'
+    ]);
 });
